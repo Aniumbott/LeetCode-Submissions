@@ -11,25 +11,13 @@
  */
 class Solution {
 public:
-    bool helper(TreeNode* root, int ans, int limit){
-        if(!root->left && !root->right){
-            if(ans+root->val < limit)
-                return false;
-            return true;
-        }
-        
-        bool left = (root->left)?helper(root->left, ans+root->val, limit):false;
-        bool right = (root->right)?helper(root->right, ans+root->val, limit):false;
-        
-        if(left && right) return true;
-        if(!right && !left) return false;
-        if(!right) root->right = NULL;
-        if(!left) root->left = NULL;
-        return true;
-    }
     TreeNode* sufficientSubset(TreeNode* root, int limit) {
-        if(helper(root, 0, limit))
-            return root;
-        return NULL;
+        if (root->left == root->right)
+            return root->val < limit ? NULL : root;
+        if (root->left)
+            root->left = sufficientSubset(root->left, limit - root->val);
+        if (root->right)
+            root->right = sufficientSubset(root->right, limit - root->val);
+        return root->left == root->right ? NULL : root;
     }
 };
