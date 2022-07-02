@@ -11,19 +11,20 @@
  */
 class Solution {
 public:
-    void helper(TreeNode*root, int &ans, string s){
+    void helper(TreeNode*root, int &ans, int p){
         if(!root) return;
         
+        p = (p<<1)+root->val;
         if(root->left == NULL && root->right == NULL)
-            ans += stoi(s+to_string(root->val), 0, 2);
+            ans += p;
         
-        helper(root->left, ans, s+to_string(root->val));
-        helper(root->right, ans, s+to_string(root->val));
+        helper(root->left, ans, p);
+        helper(root->right, ans, p);
     }
     
     int sumRootToLeaf(TreeNode* root) {
         int ans=0;
-        helper(root, ans, "");
+        helper(root, ans, 0);
         return ans;
     }
 };
