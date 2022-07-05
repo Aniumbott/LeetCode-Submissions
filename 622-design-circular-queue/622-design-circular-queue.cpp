@@ -1,52 +1,49 @@
 class MyCircularQueue {
 public:
-    int n, t=0;
-    ListNode *front, *back, *root;
+    vector<int> v;
+    int n, front, back, t=0;
+    
     MyCircularQueue(int k) {
         n=k;
-        root = new ListNode(-1);
-        back = root;
+        v.assign(k, -1);
+        front = 0;
+        back = -1;
     }
     
     bool enQueue(int value) {
-        if(isFull()) return false;
-        
-        ListNode *tp = new ListNode(value);
-        
-        if(t == 0) front = tp;
-        
-        back->next = tp;
-        back = back->next;
-        // cout << value << " ";
-        t++;
-        return true;
+        if(!isFull()){
+            back = (back+1)%n;
+            v[back] = value;
+            t++;
+            return true;
+        }
+        return false;
     }
     
     bool deQueue() {
-        if(isEmpty()) return false;
-        
-        if(t == 1) front = back = root;
-        
-        else front = front->next;
-        // cout << front->val << " ";
-        t--;
-        return true;
+        if(!isEmpty()){
+            v[front] = -1;
+            front = (front + 1)%n;
+            t--;
+            return true;
+        }
+        return false;
     }
     
     int Front() {
-        return front->val;
+        return isEmpty()?-1:v[front];
     }
     
     int Rear() {
-        return back->val;
+        return isEmpty()?-1:v[back];
     }
     
     bool isEmpty() {
-        return (t==0)?true:false;
+        return t == 0;
     }
     
     bool isFull() {
-        return (t==n)?true:false;
+        return t == n;
     }
 };
 
