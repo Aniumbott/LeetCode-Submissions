@@ -20,19 +20,19 @@ public:
             if(tp.size()) v.push_back(tp);
         }
         
-        string ans = "";
+        text = "";
         
         for(int i=0; i<v.size()-1; i++){
-            ans += v[i];
+            text += v[i];
             int j=ct/(v.size()-1);
-            while(j--) ans += ' ';
+            while(j--) text += ' ';
         }
         
-        ans += v[v.size()-1];
+        text += v[v.size()-1];
         int j=(v.size() > 1)?ct % (v.size()-1):ct;
         
-        while(j--) ans += ' ';
+        while(j--) text += ' ';
         
-        return ans;
+        return text;
     }
 };
