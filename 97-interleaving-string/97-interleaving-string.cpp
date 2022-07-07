@@ -17,10 +17,13 @@ public:
         return false;
     }
     bool isInterleave(string s1, string s2, string s3) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
         if(s3.size() != s1.size() + s2.size()) return false;
         
-        int p1=0, p2=0, p3=0;
         vector<vector<int>> dp(s1.size(), vector<int>(s2.size(), -1));
-        return helper(p1, p2, p3, s1, s2, s3, dp);
+        
+        return helper(0, 0, 0, s1, s2, s3, dp);
     }
 };
