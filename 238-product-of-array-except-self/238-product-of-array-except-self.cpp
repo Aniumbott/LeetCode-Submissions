@@ -1,20 +1,23 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-        long long int ans = 1;
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        long long ans = 1;
         int ct=0;
         
         for(auto i:nums){
-            if(i != 0) ans *= i;
+            if(i != 0) ans *= (long long)i;
             else ct++;
         }
         
-        vector<int> v;
+        vector<int> v(nums.size(),0);
         
-        for(auto i:nums){
-            if(ct > 1 || (ct == 1 && i != 0)) v.push_back(0); 
-            else if(i == 0) v.push_back(ans);
-            else v.push_back(ans/i);
+        for(int i=0; i<nums.size(); i++){
+            if(ct > 1 || (ct == 1 && nums[i] != 0)) v[i] = 0; 
+            else if(nums[i] == 0) v[i] = ans;
+            else v[i] = ans/nums[i];
         }
 
         return v;
