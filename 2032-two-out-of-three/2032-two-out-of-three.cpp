@@ -1,25 +1,19 @@
 class Solution {
 public:
     vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
-        unordered_map<int,int> mp, mp1, mp2, mp3;
-        vector<int> ans;
+        vector<int> arr(101);
         
-        for(auto i : nums1) mp1[i]++;
-        for(auto i : nums2) mp2[i]++;
-        for(auto i : nums3) mp3[i]++;
+        for (int i : nums1)
+            arr[i] = 1;
+        for (int i : nums2)
+            arr[i] |= 2;
+        for (int i : nums3)
+            arr[i] |= 4;
         
-        for(auto i : mp1)
-            if(mp2.find(i.first) != mp2.end()) mp[i.first]++;
-        
-        for(auto i : mp2)
-            if(mp3.find(i.first) != mp3.end()) mp[i.first]++;
-        
-        for(auto i : mp1)
-            if(mp3.find(i.first) != mp3.end()) mp[i.first]++;
-        
-        for(auto i : mp)
-            if(i.second > 0) ans.push_back(i.first);
-        
-        return ans;
+        vector<int> res;
+        for (int i = 1; i <= 100; ++i)
+            if (arr[i] == 3 || arr[i] == 5 || arr[i] == 6 || arr[i] == 7)
+                res.push_back(i);
+        return res;
     }
 };
