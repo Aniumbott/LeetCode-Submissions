@@ -4,8 +4,22 @@
 class Solution {
 public:
     int firstBadVersion(int n) {
-        int i=0;
-        while(!isBadVersion(i)) i++;
-        return i;
+        int left, right, mid;
+        left = 1;
+        right = n;
+        int sol = 0;
+        while (left<=right) {
+
+            mid = left + (right-left)/2;  
+            
+            if(isBadVersion(mid)){
+                sol = mid;
+                right = mid-1;
+            }else{
+                left = mid+1;
+            }
+        }
+                               
+        return sol;
     }
 };
