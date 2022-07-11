@@ -1,20 +1,38 @@
 class Solution {
 public:
-    bool isPalindrome(string s,int l,int r,bool t){
-        while(l<r){
-            if(s[l]!=s[r]){
-                if(!t) return false;
-                else return isPalindrome(s,l+1,r,false) || isPalindrome(s,l,r-1,false);
-                t = false;
-            }
-            l++;
-            r--;
+    bool afterDeleting( string s ,int i,int j){
+         int ii=i;
+         int jj =j;
+        while(ii<jj){
+           if(s[ii] != s[jj]){
+               return false;
+           }else{
+               ii++;
+               jj--;
+           }
+            
         }
         return true;
     }
+    
+    bool checkpalindrome(string s){
+        int i=0;
+        int e =s.length()-1;
+        
+        while(i<e){
+            if(s[i] != s[e]){
+            
+                return afterDeleting(s,i+1,e) || afterDeleting(s,i,e-1);
+                
+            }else{
+                i++;
+                e--;
+            }
+        }
+        return true;
+    }
+    
     bool validPalindrome(string s) {
-        bool t = true;
-        int l=0,r=s.size()-1;
-        return isPalindrome(s,l,r,t);
+        return checkpalindrome(s);
     }
 };
