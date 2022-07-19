@@ -20,25 +20,28 @@
  * };
  */
 class Solution {
-private:
-    ListNode* head;
-    
-    TreeNode* helper(int l, int r){
-        if(l > r) return NULL;
-        int m = l+(r-l)/2;
-        TreeNode*root = new TreeNode(0);
-        root->left = helper(l, m-1);
-        root->val = head->val;
-        head = head->next;
-        root->right = helper(m+1, r);
-        return root;
-    }
+
 public:
     TreeNode* sortedListToBST(ListNode* head) {
         if(!head) return NULL;
-        this->head=head;
-        int n=0;
-        while(head){ n++; head=head->next; }
-        return helper(0, n-1);
+        
+        if (!head->next) return new TreeNode(head->val);
+        
+        ListNode *slow = head, *fast = head, *prev = NULL;
+        
+        while (fast && fast->next) {
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        TreeNode* root = new TreeNode(slow->val);
+        
+        prev->next = NULL;
+        
+        root->left = sortedListToBST(head);
+        root->right = sortedListToBST(slow->next);
+        
+        return root;
     }
 };
