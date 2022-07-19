@@ -11,20 +11,23 @@
  */
 class Solution {
 private:
-    struct pir{ int first = -1, second = - 1; };
-
-    unordered_map<TreeNode*, pir> dp;
     
-    int heightl(TreeNode*root){
-        if(!root) return 0;
-        if(dp[root].first != -1) return dp[root].first;
-        return dp[root].first = 1 + heightl(root->left);
+    int heightl(TreeNode* root){
+        int ans=0;
+        while(root){
+            root = root->left;
+            ans++;
+        }
+        return ans;
     }
     
-    int heightr(TreeNode*root){
-        if(!root) return 0;
-        if(dp[root].second != -1) return dp[root].second;
-        return dp[root].second = 1 + heightr(root->right);
+    int heightr(TreeNode* root){
+        int ans=0;
+        while(root){
+            root = root->right;
+            ans++;
+        }
+        return ans;
     }
     
     
