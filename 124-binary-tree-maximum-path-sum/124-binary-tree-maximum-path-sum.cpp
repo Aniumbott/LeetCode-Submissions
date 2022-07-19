@@ -14,7 +14,6 @@ private:
     
     int helper(TreeNode* root, int&ans){
         if(!root) return 0;
-        ans = max(ans, root->val);
         int left = max(0, helper(root->left,ans));
         int right = max(0, helper(root->right,ans));
         ans = max(ans, root->val + left + right);
