@@ -9,10 +9,7 @@ public:
     }
     
     int sumRange(int left, int right) {
-        if(left > 0)
-            return v[right] - v[left-1];
-        else 
-            return v[right];
+        return (left == 0)?v[right]:v[right] - v[left-1];
     }
 };
 
