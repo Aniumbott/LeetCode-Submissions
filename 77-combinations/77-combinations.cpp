@@ -6,10 +6,10 @@ private:
     void helper(int i, int n, int k) {
         while (i <= n) {
             v[v.size() - k] = i++;
-            if (k > 1)
-                helper(i, n, k - 1);
-            else
-                ans.push_back(v);
+            
+            if (k > 1) helper(i, n, k - 1);
+            
+            else ans.push_back(v);
         }
     }
 public:
