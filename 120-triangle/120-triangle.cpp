@@ -24,10 +24,27 @@ public:
         return dp[0][0];
     }
     
+    int spaceOptimized(vector<vector<int>> mat){
+        int n = mat.size();
+        vector<int> pre(n, 0);
+        for(int j=0; j<n; j++) pre[j] = mat[n-1][j];
+        for(int i = n-2; i>=0; i--){
+            vector<int> cur(n, 0);
+            for(int j=i; j>=0; j--){
+                int d = mat[i][j] + pre[j];
+                int dg = mat[i][j] + pre[j+1];
+                cur[j] = min(d, dg);
+            }
+            pre = cur;
+        }
+        return pre[0];
+    }
+    
     int minimumTotal(vector<vector<int>>& triangle) {
         int n = triangle.size();
         vector<vector<int>> mp(n, vector<int>(n, -1));
         // return memoize(0, 0, n, triangle, mp);
-        return tabulate(triangle);
+        // return tabulate(triangle);
+        return spaceOptimized(triangle);
     }
 };
