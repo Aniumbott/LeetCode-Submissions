@@ -24,13 +24,23 @@ private:
     }
     
 public:
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if(lists.empty()) return NULL;
-        while(lists.size() > 1){
-            lists.push_back(mergeTwoLists(lists[0], lists[1]));
-            lists.erase(lists.begin());
-            lists.erase(lists.begin());
+    ListNode* mergeKLists(vector<ListNode*>& a) {
+        int k=a.size();
+        
+        if(k==0)return NULL;
+        
+        int i=0, last=k-1;
+        int j=0;
+        
+        while(last!=0){
+            i=0;
+            j=last;
+            while(i<j){
+                a[i]=mergeTwoLists(a[i],a[j]);
+                i+=1, j-=1;
+            }
+            last=j;
         }
-        return lists.front();
+        return a[0];
     }
 };
