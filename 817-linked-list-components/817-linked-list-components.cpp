@@ -21,12 +21,13 @@ public:
         for(auto i:nums) mp[i] = true;
         
         while(head != NULL){
+            
             if(mp[head->val]){
                 ans++;
                 while(head != NULL && mp[head->val]) head = head->next;    
             }
             
-            if(head) head = head->next;
+            else head = head->next;
         }
         
         return ans;
