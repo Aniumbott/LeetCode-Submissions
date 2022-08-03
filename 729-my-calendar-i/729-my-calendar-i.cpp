@@ -37,14 +37,6 @@ public:
         return false;
     }
     
-    
-    void prnt(item *cur){
-        if(!cur) return;
-        cout << cur->start << "-" << cur->end << " ";
-        prnt(cur->left);
-        prnt(cur->right);
-    }
-    
     bool book(int start, int end) {
         item *cur = head;
         if(cur->start == 0 && cur->end == 0){
@@ -55,9 +47,3 @@ public:
         else return insert(cur, start, end);
     }
 };
-
-/**
- * Your MyCalendar object will be instantiated and called as such:
- * MyCalendar* obj = new MyCalendar();
- * bool param_1 = obj->book(start,end);
- */
